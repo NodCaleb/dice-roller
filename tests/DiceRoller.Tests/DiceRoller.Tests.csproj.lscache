@@ -61,7 +61,9 @@ obj/Debug/net10.0/
  DiceRoller.Tests.AssemblyInfo.cs
  DiceRoller.Tests.GlobalUsings.g.cs
 Parsing/DiceExpressionParserTests.cs
-Rolling/DiceRollerServiceTests.cs
+Rolling/
+ DiceRollerServiceTests.cs
+ RandomnessDistributionTests.cs
 
 [metadataReferences]
 ../../src/DiceRoller/obj/Debug/net10.0/ref/DiceRoller.dll

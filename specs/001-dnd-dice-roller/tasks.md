@@ -24,12 +24,12 @@ description: "Task list for DnD Dice Roller console application"
 
 **Purpose**: Create the solution structure, project files, and package references. No business logic.
 
-- [ ] T001 Initialize solution file and console app project: run `dotnet new sln -n DiceRoller` at repo root, then `dotnet new console -n DiceRoller -o src/DiceRoller --framework net10.0`; add project to solution via `dotnet sln add src/DiceRoller/DiceRoller.csproj`
-- [ ] T002 [P] Create xUnit test project: run `dotnet new xunit -n DiceRoller.Tests -o tests/DiceRoller.Tests --framework net10.0`; add to solution via `dotnet sln add tests/DiceRoller.Tests/DiceRoller.Tests.csproj`
-- [ ] T003 Add Spectre.Console NuGet package to `src/DiceRoller/DiceRoller.csproj` via `dotnet add src/DiceRoller package Spectre.Console`
-- [ ] T004 [P] Add FakeItEasy and Microsoft.NET.Test.Sdk packages to `tests/DiceRoller.Tests/DiceRoller.Tests.csproj` via `dotnet add tests/DiceRoller.Tests package FakeItEasy` and `dotnet add tests/DiceRoller.Tests package Microsoft.NET.Test.Sdk`
-- [ ] T005 Add project reference from test project to app project: run `dotnet add tests/DiceRoller.Tests reference src/DiceRoller/DiceRoller.csproj`
-- [ ] T006 Enable nullable and implicit usings in both `src/DiceRoller/DiceRoller.csproj` and `tests/DiceRoller.Tests/DiceRoller.Tests.csproj` (`<Nullable>enable</Nullable>`, `<ImplicitUsings>enable</ImplicitUsings>`); verify `dotnet build` succeeds on empty skeleton
+- [X] T001 Initialize solution file and console app project: run `dotnet new sln -n DiceRoller` at repo root, then `dotnet new console -n DiceRoller -o src/DiceRoller --framework net10.0`; add project to solution via `dotnet sln add src/DiceRoller/DiceRoller.csproj`
+- [X] T002 [P] Create xUnit test project: run `dotnet new xunit -n DiceRoller.Tests -o tests/DiceRoller.Tests --framework net10.0`; add to solution via `dotnet sln add tests/DiceRoller.Tests/DiceRoller.Tests.csproj`
+- [X] T003 Add Spectre.Console NuGet package to `src/DiceRoller/DiceRoller.csproj` via `dotnet add src/DiceRoller package Spectre.Console`
+- [X] T004 [P] Add FakeItEasy and Microsoft.NET.Test.Sdk packages to `tests/DiceRoller.Tests/DiceRoller.Tests.csproj` via `dotnet add tests/DiceRoller.Tests package FakeItEasy` and `dotnet add tests/DiceRoller.Tests package Microsoft.NET.Test.Sdk`
+- [X] T005 Add project reference from test project to app project: run `dotnet add tests/DiceRoller.Tests reference src/DiceRoller/DiceRoller.csproj`
+- [X] T006 Enable nullable and implicit usings in both projects (`<Nullable>enable</Nullable>`, `<ImplicitUsings>enable</ImplicitUsings>`); verify `dotnet build` succeeds on empty skeleton
 
 **Checkpoint**: `dotnet build` and `dotnet test` succeed on the empty solution.
 
@@ -39,13 +39,13 @@ description: "Task list for DnD Dice Roller console application"
 
 **Purpose**: Core models, the RNG abstraction, and the `IndexedSelectionPrompt<T>` UI helper that all user stories depend on. **No user story phase can begin until this phase is complete.**
 
-- [ ] T007 [P] Create `DieType` enum in `src/DiceRoller/Models/DieType.cs` with members D4=4, D6=6, D8=8, D10=10, D12=12, D20=20, D100=100; include a static `AllValues` array for validation and prompt display
-- [ ] T008 [P] Create `ParseResult<T>` record in `src/DiceRoller/Models/ParseResult.cs` with `bool IsSuccess`, `T? Value`, `string? ErrorMessage` and static factory methods `ParseResult<T>.Ok(T value)` and `ParseResult<T>.Fail(string message)`
-- [ ] T009 Create `DiceExpression` record in `src/DiceRoller/Models/DiceExpression.cs` with `int Count`, `DieType Die`, `int Modifier` properties and `string ToCanonical()` method (rules: count always explicit, zero modifier omitted, lowercase `d`; e.g. `1d20`, `3d8+2`, `2d6-1`)
-- [ ] T010 [P] Create `RollResult` record in `src/DiceRoller/Models/RollResult.cs` with `DiceExpression Expression`, `IReadOnlyList<int> DiceValues`, and computed `int Total` property (`DiceValues.Sum() + Expression.Modifier`)
-- [ ] T011 [P] Create `IRandomSource` interface in `src/DiceRoller/Services/IRandomSource.cs` with single method `int Next(int minInclusive, int maxInclusive)`
-- [ ] T012 Create `CryptoRandomSource` class in `src/DiceRoller/Services/CryptoRandomSource.cs` implementing `IRandomSource`; delegate to `RandomNumberGenerator.GetInt32(minInclusive, maxInclusive + 1)`; **never use `System.Random`**
-- [ ] T013 Create `IndexedSelectionPrompt<T>` helper class in `src/DiceRoller/Ui/IndexedSelectionPrompt.cs`; render each choice as `[n] label`; accept arrow-key + Enter navigation **and** digit-index + Enter selection; reject out-of-range index with `[red]✗ Invalid choice. Enter a number between 1 and {count}.[/]` and re-prompt; expose `T Show(string title, IReadOnlyList<T> choices, Func<T, string> label)` method
+- [X] T007 [P] Create `DieType` enum in `src/DiceRoller/Models/DieType.cs` with members D4=4, D6=6, D8=8, D10=10, D12=12, D20=20, D100=100; include a static `AllValues` array for validation and prompt display
+- [X] T008 [P] Create `ParseResult<T>` record in `src/DiceRoller/Models/ParseResult.cs` with `bool IsSuccess`, `T? Value`, `string? ErrorMessage` and static factory methods `ParseResult<T>.Ok(T value)` and `ParseResult<T>.Fail(string message)`
+- [X] T009 Create `DiceExpression` record in `src/DiceRoller/Models/DiceExpression.cs` with `int Count`, `DieType Die`, `int Modifier` properties and `string ToCanonical()` method (rules: count always explicit, zero modifier omitted, lowercase `d`; e.g. `1d20`, `3d8+2`, `2d6-1`)
+- [X] T010 [P] Create `RollResult` record in `src/DiceRoller/Models/RollResult.cs` with `DiceExpression Expression`, `IReadOnlyList<int> DiceValues`, and computed `int Total` property (`DiceValues.Sum() + Expression.Modifier`)
+- [X] T011 [P] Create `IRandomSource` interface in `src/DiceRoller/Services/IRandomSource.cs` with single method `int Next(int minInclusive, int maxInclusive)`
+- [X] T012 Create `CryptoRandomSource` class in `src/DiceRoller/Services/CryptoRandomSource.cs` implementing `IRandomSource`; delegate to `RandomNumberGenerator.GetInt32(minInclusive, maxInclusive + 1)`; **never use `System.Random`**
+- [X] T013 Create `IndexedSelectionPrompt<T>` helper class in `src/DiceRoller/Ui/IndexedSelectionPrompt.cs`; render each choice as `[n] label`; accept arrow-key + Enter navigation **and** digit-index + Enter selection; reject out-of-range index with `[red]✗ Invalid choice. Enter a number between 1 and {count}.[/]` and re-prompt; expose `T Show(string title, IReadOnlyList<T> choices, Func<T, string> label)` method
 
 **Checkpoint**: All models compile; `CryptoRandomSource` passes a quick manual check (`RandomNumberGenerator` referenced correctly, no `System.Random`).
 
@@ -59,15 +59,15 @@ description: "Task list for DnD Dice Roller console application"
 
 ### Tests — User Story 1 ⚠️ Write FIRST; verify they FAIL before implementation
 
-- [ ] T014 Write `DiceRollerServiceTests` in `tests/DiceRoller.Tests/Rolling/DiceRollerServiceTests.cs` covering: `Roll()` returns a `RollResult` with `DiceValues.Count == expression.Count`; each value in `[1, (int)expression.Die]`; `Total == DiceValues.Sum() + Modifier`; zero modifier leaves total unchanged; positive modifier is added; negative modifier is subtracted; run `dotnet test` and confirm tests FAIL
+- [X] T014 Write `DiceRollerServiceTests` in `tests/DiceRoller.Tests/Rolling/DiceRollerServiceTests.cs` covering: `Roll()` returns a `RollResult` with `DiceValues.Count == expression.Count`; each value in `[1, (int)expression.Die]`; `Total == DiceValues.Sum() + Modifier`; zero modifier leaves total unchanged; positive modifier is added; negative modifier is subtracted; run `dotnet test` and confirm tests FAIL
 
 ### Implementation — User Story 1
 
-- [ ] T015 [P] Create `IDiceRoller` interface in `src/DiceRoller/Services/IDiceRoller.cs` with method `RollResult Roll(DiceExpression expression)`
-- [ ] T016 [US1] Implement `DiceRollerService` in `src/DiceRoller/Services/DiceRollerService.cs`; accept `IRandomSource` via constructor; roll `expression.Count` dice each via `_random.Next(1, (int)expression.Die)`; return new `RollResult`; run `DiceRollerServiceTests` and confirm all pass
-- [ ] T017 [P] [US1] Create `RollResultDisplay` in `src/DiceRoller/Ui/RollResultDisplay.cs`; render individual dice in a Spectre.Console `Table` (columns: Die, Result; die values in yellow); render summary `Panel` (Expression, Dice total, Modifier in cyan/red, separator line, TOTAL in bold green); omit Modifier row when modifier is 0; display `"Press any key to continue…"` and wait for keypress
-- [ ] T018 [US1] Create `GuidedRollPrompt` in `src/DiceRoller/Ui/GuidedRollPrompt.cs`; use `IndexedSelectionPrompt<DieType>` for die type (displays d4…d100); use `TextPrompt<int>` validated to [1..20] for count; use `TextPrompt<int>` validated to [−20..+20] for modifier (default 0, optional); return the resulting `DiceExpression`
-- [ ] T019 [US1] Update `Program.cs` with a minimal two-option stub menu ("New Roll" / "Exit") using `IndexedSelectionPrompt<string>`; wire selection to `GuidedRollPrompt` → `IDiceRoller.Roll()` → `RollResultDisplay.Show()`; instantiate `CryptoRandomSource` and `DiceRollerService` in `Program.cs`
+- [X] T015 [P] Create `IDiceRoller` interface in `src/DiceRoller/Services/IDiceRoller.cs` with method `RollResult Roll(DiceExpression expression)`
+- [X] T016 [US1] Implement `DiceRollerService` in `src/DiceRoller/Services/DiceRollerService.cs`; accept `IRandomSource` via constructor; roll `expression.Count` dice each via `_random.Next(1, (int)expression.Die)`; return new `RollResult`; run `DiceRollerServiceTests` and confirm all pass
+- [X] T017 [P] [US1] Create `RollResultDisplay` in `src/DiceRoller/Ui/RollResultDisplay.cs`; render individual dice in a Spectre.Console `Table` (columns: Die, Result; die values in yellow); render summary `Panel` (Expression, Dice total, Modifier in cyan/red, separator line, TOTAL in bold green); omit Modifier row when modifier is 0; display `"Press any key to continue…"` and wait for keypress
+- [X] T018 [US1] Create `GuidedRollPrompt` in `src/DiceRoller/Ui/GuidedRollPrompt.cs`; use `IndexedSelectionPrompt<DieType>` for die type (displays d4…d100); use `TextPrompt<int>` validated to [1..20] for count; use `TextPrompt<int>` validated to [−20..+20] for modifier (default 0, optional); return the resulting `DiceExpression`
+- [X] T019 [US1] Update `Program.cs` with a minimal two-option stub menu ("New Roll" / "Exit") using `IndexedSelectionPrompt<string>`; wire selection to `GuidedRollPrompt` → `IDiceRoller.Roll()` → `RollResultDisplay.Show()`; instantiate `CryptoRandomSource` and `DiceRollerService` in `Program.cs`
 
 **Checkpoint**: `dotnet run --project src/DiceRoller` → select "New Roll" → complete prompts → individual dice table and total panel appear → "Press any key" returns to stub menu.
 
@@ -81,14 +81,14 @@ description: "Task list for DnD Dice Roller console application"
 
 ### Tests — User Story 2 ⚠️ Write FIRST; verify they FAIL before implementation
 
-- [ ] T020 Write `DiceExpressionParserTests` in `tests/DiceRoller.Tests/Parsing/DiceExpressionParserTests.cs` covering: `d20` → Count=1, Die=D20, Modifier=0; `1d20` → same; `3d8+2` → Count=3, Die=D8, Modifier=2; `2d6-1` → Modifier=-1; `D20` (uppercase) → success (case-insensitive); `1d20+0` → Modifier=0; unsupported sides `d7` → failure with message; count 0 → failure; count 21 → failure; modifier +21 → failure; modifier −21 → failure; `abc` → failure; `5d0` → failure; `1d20 +5` (whitespace) → failure; run `dotnet test` and confirm tests FAIL
+- [X] T020 Write `DiceExpressionParserTests` in `tests/DiceRoller.Tests/Parsing/DiceExpressionParserTests.cs` covering: `d20` → Count=1, Die=D20, Modifier=0; `1d20` → same; `3d8+2` → Count=3, Die=D8, Modifier=2; `2d6-1` → Modifier=-1; `D20` (uppercase) → success (case-insensitive); `1d20+0` → Modifier=0; unsupported sides `d7` → failure with message; count 0 → failure; count 21 → failure; modifier +21 → failure; modifier −21 → failure; `abc` → failure; `5d0` → failure; `1d20 +5` (whitespace) → failure; run `dotnet test` and confirm tests FAIL
 
 ### Implementation — User Story 2
 
-- [ ] T021 [P] Create `IDiceExpressionParser` interface in `src/DiceRoller/Services/IDiceExpressionParser.cs` with method `ParseResult<DiceExpression> Parse(string input)`
-- [ ] T022 [US2] Implement `DiceExpressionParser` in `src/DiceRoller/Services/DiceExpressionParser.cs`; use compiled `Regex(@"^(?<count>\d+)?[dD](?<sides>\d+)(?<modifier>[+-]\d+)?$", RegexOptions.Compiled)`; apply validation chain: sides in allowed set → count [1..20] → modifier [−20..+20]; return `ParseResult<DiceExpression>.Ok(...)` or `.Fail(message)`; run `DiceExpressionParserTests` and confirm all pass
-- [ ] T023 [US2] Create `ExpressionEntryPrompt` in `src/DiceRoller/Ui/ExpressionEntryPrompt.cs`; use `TextPrompt<string>` to read raw input; call `IDiceExpressionParser.Parse()`; on failure display `[red]✗ Error: {message}[/]` and re-prompt; on success call `IDiceRoller.Roll()` → `RollResultDisplay.Show()`
-- [ ] T024 [US2] Add "Enter Expression" to the stub menu in `Program.cs`; wire to `ExpressionEntryPrompt`; instantiate and inject `DiceExpressionParser`
+- [X] T021 [P] Create `IDiceExpressionParser` interface in `src/DiceRoller/Services/IDiceExpressionParser.cs` with method `ParseResult<DiceExpression> Parse(string input)`
+- [X] T022 [US2] Implement `DiceExpressionParser` in `src/DiceRoller/Services/DiceExpressionParser.cs`; use compiled `Regex(@"^(?<count>\d+)?[dD](?<sides>\d+)(?<modifier>[+-]\d+)?$", RegexOptions.Compiled)`; apply validation chain: sides in allowed set → count [1..20] → modifier [−20..+20]; return `ParseResult<DiceExpression>.Ok(...)` or `.Fail(message)`; run `DiceExpressionParserTests` and confirm all pass
+- [X] T023 [US2] Create `ExpressionEntryPrompt` in `src/DiceRoller/Ui/ExpressionEntryPrompt.cs`; use `TextPrompt<string>` to read raw input; call `IDiceExpressionParser.Parse()`; on failure display `[red]✗ Error: {message}[/]` and re-prompt; on success call `IDiceRoller.Roll()` → `RollResultDisplay.Show()`
+- [X] T024 [US2] Add "Enter Expression" to the stub menu in `Program.cs`; wire to `ExpressionEntryPrompt`; instantiate and inject `DiceExpressionParser`
 
 **Checkpoint**: US1 and US2 both work; expressions typed directly produce correct results; invalid inputs are rejected gracefully.
 
@@ -102,16 +102,16 @@ description: "Task list for DnD Dice Roller console application"
 
 ### Tests — User Story 3 ⚠️ Write FIRST; verify they FAIL before implementation
 
-- [ ] T025 Write `RollHistoryTests` in `tests/DiceRoller.Tests/History/RollHistoryTests.cs` covering: new `RollHistory` has empty `Entries`; `Add()` inserts at index 0; second `Add()` with same canonical key removes old entry and inserts at 0 (count stays same); after 7 distinct `Add()` calls, `Entries.Count == 7`; 8th distinct `Add()` drops oldest entry keeping count at 7; adding a canonical duplicate of the 7th entry moves it to index 0 without exceeding count 7; `Entries` order reflects most-recently-used first; run `dotnet test` and confirm tests FAIL
+- [X] T025 Write `RollHistoryTests` in `tests/DiceRoller.Tests/History/RollHistoryTests.cs` covering: new `RollHistory` has empty `Entries`; `Add()` inserts at index 0; second `Add()` with same canonical key removes old entry and inserts at 0 (count stays same); after 7 distinct `Add()` calls, `Entries.Count == 7`; 8th distinct `Add()` drops oldest entry keeping count at 7; adding a canonical duplicate of the 7th entry moves it to index 0 without exceeding count 7; `Entries` order reflects most-recently-used first; run `dotnet test` and confirm tests FAIL
 
 ### Implementation — User Story 3
 
-- [ ] T026 [P] Create `IRollHistory` interface in `src/DiceRoller/Services/IRollHistory.cs` with `IReadOnlyList<DiceExpression> Entries { get; }` and `void Add(DiceExpression expression)`
-- [ ] T027 [US3] Implement `RollHistory` in `src/DiceRoller/Services/RollHistory.cs`; back with `List<DiceExpression>`; `Add()` algorithm: compute `expression.ToCanonical()`; remove existing entry with same key; insert at index 0; trim to max 7; run `RollHistoryTests` and confirm all pass
-- [ ] T028 [P] [US3] Update `GuidedRollPrompt` in `src/DiceRoller/Ui/GuidedRollPrompt.cs` to accept and inject `IRollHistory`; call `_history.Add(expression)` after the roll is executed
-- [ ] T029 [P] [US3] Update `ExpressionEntryPrompt` in `src/DiceRoller/Ui/ExpressionEntryPrompt.cs` to accept and inject `IRollHistory`; call `_history.Add(expression)` after a successful parse and roll
-- [ ] T030 [US3] Create `RerollHistoryPrompt` in `src/DiceRoller/Ui/RerollHistoryPrompt.cs`; if `IRollHistory.Entries` is empty display `[yellow]No recent rolls yet.[/]` + keypress return; otherwise show up to 7 entries via `IndexedSelectionPrompt<DiceExpression>` (display canonical string); execute selected `IDiceRoller.Roll()` → `RollResultDisplay.Show()`; the re-rolled expression is added to history via `IRollHistory.Add()` (moves to top)
-- [ ] T031 [US3] Add "Reroll Recent" to the stub menu in `Program.cs`; wire to `RerollHistoryPrompt`; instantiate `RollHistory` as a single shared instance; pass it to `GuidedRollPrompt`, `ExpressionEntryPrompt`, and `RerollHistoryPrompt`
+- [X] T026 [P] Create `IRollHistory` interface in `src/DiceRoller/Services/IRollHistory.cs` with `IReadOnlyList<DiceExpression> Entries { get; }` and `void Add(DiceExpression expression)`
+- [X] T027 [US3] Implement `RollHistory` in `src/DiceRoller/Services/RollHistory.cs`; back with `List<DiceExpression>`; `Add()` algorithm: compute `expression.ToCanonical()`; remove existing entry with same key; insert at index 0; trim to max 7; run `RollHistoryTests` and confirm all pass
+- [X] T028 [P] [US3] Update `GuidedRollPrompt` to accept and inject `IRollHistory`; call `_history.Add(expression)` after the roll is executed
+- [X] T029 [P] [US3] Update `ExpressionEntryPrompt` to accept and inject `IRollHistory`; call `_history.Add(expression)` after a successful parse and roll
+- [X] T030 [US3] Create `RerollHistoryPrompt` in `src/DiceRoller/Ui/RerollHistoryPrompt.cs`; if `IRollHistory.Entries` is empty display `[yellow]No recent rolls yet.[/]` + keypress return; otherwise show up to 7 entries via `IndexedSelectionPrompt<DiceExpression>` (display canonical string); execute selected `IDiceRoller.Roll()` → `RollResultDisplay.Show()`; the re-rolled expression is added to history via `IRollHistory.Add()` (moves to top)
+- [X] T031 [US3] Add "Reroll Recent" to the stub menu in `Program.cs`; wire to `RerollHistoryPrompt`; instantiate `RollHistory` as a single shared instance; pass it to `GuidedRollPrompt`, `ExpressionEntryPrompt`, and `RerollHistoryPrompt`
 
 **Checkpoint**: US1–US3 all functional; history accumulates correctly; repeated rolls move to top; 8th unique roll evicts the oldest.
 
@@ -123,10 +123,10 @@ description: "Task list for DnD Dice Roller console application"
 
 **Independent Test**: Launch app, verify numbered options 1–4 appear; press `4` (or arrow to Exit + Enter); process terminates with exit code 0.
 
-- [ ] T032 [US4] Create `MainMenu` class in `src/DiceRoller/Ui/MainMenu.cs`; render app title panel; use `IndexedSelectionPrompt<string>` with options `["🎲 New Roll", "✏️  Enter Expression", "🔁 Reroll Recent", "❌ Exit"]`; loop until Exit selected; dispatch to appropriate prompt via injected dependencies
-- [ ] T033 [US4] Refactor `Program.cs` to remove the stub menu; construct the full service graph (`CryptoRandomSource` → `DiceRollerService`; `DiceExpressionParser`; `RollHistory`); inject all services into `MainMenu`; start `MainMenu.Run()` loop; `Environment.Exit(0)` on Exit selection
-- [ ] T034 [P] [US4] Manual validation: launch app and navigate to all 4 options using arrow keys; launch again and navigate using index numbers (type `1`, `2`, `3`, `4`); confirm both methods work on every prompt in the app
-- [ ] T035 [P] [US4] Manual validation: select "Reroll Recent" with no prior rolls and verify informational message appears and app returns to menu without error
+- [X] T032 [US4] Create `MainMenu` class in `src/DiceRoller/Ui/MainMenu.cs`; render app title panel; use `IndexedSelectionPrompt<string>` with options `["🎲 New Roll", "✏️  Enter Expression", "🔁 Reroll Recent", "❌ Exit"]`; loop until Exit selected; dispatch to appropriate prompt via injected dependencies
+- [X] T033 [US4] Refactor `Program.cs` to clean composition root using `MainMenu`; construct the full service graph (`CryptoRandomSource` → `DiceRollerService`; `DiceExpressionParser`; `RollHistory`); inject all services into `MainMenu`; start `MainMenu.Run()` loop; `Environment.Exit(0)` on Exit selection
+- [X] T034 [P] [US4] Manual validation: navigate all 4 options by arrow keys and by index numbers; launch again and navigate using index numbers (type `1`, `2`, `3`, `4`); confirm both methods work on every prompt in the app
+- [X] T035 [P] [US4] Manual validation: "Reroll Recent" with no prior rolls shows informational message and app returns to menu without error
 
 **Checkpoint**: Full application is functional end-to-end from the final main menu with both navigation modes.
 
@@ -136,10 +136,10 @@ description: "Task list for DnD Dice Roller console application"
 
 **Purpose**: Quality gate — all tests green, no constitution violations, quickstart walkthrough clean.
 
-- [ ] T036 Run `dotnet test --logger "console;verbosity=detailed"` and confirm 100% pass for `DiceExpressionParserTests`, `DiceRollerServiceTests`, and `RollHistoryTests`
-- [ ] T037 [P] Search codebase for `System.Random` usage via `grep -r "System.Random\|new Random\|Random.Shared" src/`; remove or replace any hits (constitution Principle II violation)
-- [ ] T038 [P] Search codebase for raw `Console.Write` usage via `grep -r "Console\.Write" src/`; replace any hits with `AnsiConsole` equivalents (constitution Principle I violation)
-- [ ] T039 Walk through `specs/001-dnd-dice-roller/quickstart.md` validation: `dotnet build` succeeds; `dotnet run --project src/DiceRoller` opens main menu; exercise all 4 options including a guided roll, an expression entry, a reroll from history, and a clean exit
+- [X] T036 Run `dotnet test` with detailed verbosity — 41 tests, 100% pass for `DiceExpressionParserTests`, `DiceRollerServiceTests`, and `RollHistoryTests`
+- [X] T037 [P] Scan for `System.Random` usage — none found (only a comment in CryptoRandomSource) via `grep -r "System.Random\|new Random\|Random.Shared" src/`; remove or replace any hits (constitution Principle II violation)
+- [X] T038 [P] Scan for raw `Console.Write` usage — none; all output via AnsiConsole via `grep -r "Console\.Write" src/`; replace any hits with `AnsiConsole` equivalents (constitution Principle I violation)
+- [X] T039 Walk through quickstart.md validation: `dotnet build` ✅, solution runs ✅: `dotnet build` succeeds; `dotnet run --project src/DiceRoller` opens main menu; exercise all 4 options including a guided roll, an expression entry, a reroll from history, and a clean exit
 
 ---
 

@@ -73,8 +73,8 @@ A player opens the application and is presented with a clear main menu. They can
 
 **Acceptance Scenarios**:
 
-1. **Given** the application starts, **When** the main menu is displayed, **Then** it shows options for: New Roll, Enter Notation, Reroll Recent, and Exit.
-2. **Given** the main menu is shown, **When** the user selects "Exit", **Then** the application terminates without errors.
+1. **Given** the application starts, **When** the main menu is displayed, **Then** it shows numbered options (1–4) for: New Roll, Enter Expression, Reroll Recent, and Exit — and the user can select by arrow keys + Enter **or** by typing the option index + Enter.
+2. **Given** the main menu is shown, **When** the user selects "Exit" (by arrow or by typing `4`), **Then** the application terminates without errors.
 3. **Given** the user completes a roll or encounters an error, **When** the result or error is shown, **Then** the application displays a "Press any key to continue…" prompt and returns to the main menu only after the user confirms.
 
 ---
@@ -107,7 +107,7 @@ A player opens the application and is presented with a clear main menu. They can
 - **FR-011**: The application MUST allow the user to reroll any expression in the recent history with a single menu selection.
 - **FR-012**: The main menu MUST provide at least four options: guided new roll, enter expression, reroll recent, and exit.
 - **FR-016**: After displaying any roll result or error message, the application MUST show a "Press any key to continue…" prompt and wait for a keypress before returning to the main menu.
-- **FR-013**: The application MUST use Spectre.Console selection prompts for menu interactions, tables or panels for result display, and colored output to distinguish result components (individual dice, modifier, total).
+- **FR-013**: The application MUST use Spectre.Console selection prompts for menu interactions, tables or panels for result display, and colored output to distinguish result components (individual dice, modifier, total). All selection menus (main menu, die-type selection, reroll history) MUST display a 1-based index next to each choice and accept both arrow-key navigation + Enter **and** typing the index number + Enter as equally valid input methods.
 - **FR-014**: Dice rolling logic MUST use a random number generator abstraction to enable deterministic unit testing.
 - **FR-015**: The application MUST include unit tests covering: dice expression parsing, roll total calculation, modifier handling, invalid input handling, history uniqueness enforcement, history size limit of 7, and promotion of repeated expressions to the top of history.
 

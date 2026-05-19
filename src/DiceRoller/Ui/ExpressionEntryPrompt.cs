@@ -35,9 +35,10 @@ public sealed class ExpressionEntryPrompt
                 continue;
             }
 
-            var result = _roller.Roll(parsed.Value!);
+            var result1 = _roller.Roll(parsed.Value!);
+            var result2 = _roller.Roll(parsed.Value!);
             _history?.Add(parsed.Value!);
-            RollResultDisplay.Show(result);
+            RollResultDisplay.ShowDouble(result1, result2);
             break;
         }
     }

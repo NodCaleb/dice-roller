@@ -39,8 +39,9 @@ public sealed class GuidedRollPrompt
                     : ValidationResult.Error("[red]Modifier must be between −20 and +20.[/]")));
 
         var expression = new DiceExpression(count, dieType, modifier);
-        var result = _roller.Roll(expression);
+        var result1 = _roller.Roll(expression);
+        var result2 = _roller.Roll(expression);
         _history?.Add(expression);
-        RollResultDisplay.Show(result);
+        RollResultDisplay.ShowDouble(result1, result2);
     }
 }

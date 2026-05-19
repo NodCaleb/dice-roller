@@ -1,6 +1,8 @@
 using DiceRoller.Services;
 using DiceRoller.Ui;
 
+Console.Title = "Dice Roller";
+
 var randomSource = new CryptoRandomSource();
 var roller = new DiceRollerService(randomSource);
 var parser = new DiceExpressionParser();

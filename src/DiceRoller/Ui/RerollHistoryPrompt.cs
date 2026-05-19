@@ -33,7 +33,8 @@ public sealed class RerollHistoryPrompt
             e => e.ToCanonical());
 
         _history.Add(selected);
-        var result = _roller.Roll(selected);
-        RollResultDisplay.Show(result);
+        var result1 = _roller.Roll(selected);
+        var result2 = _roller.Roll(selected);
+        RollResultDisplay.ShowDouble(result1, result2);
     }
 }
